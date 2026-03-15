@@ -4,12 +4,12 @@ A command-line task manager written in Python.
 
 ## Features
 
--Add tasks
--Edit tasks
--Complete tasks
--Delete tasks
--Task history logging
--Pagination system for task and history
+- Add tasks
+- Edit tasks
+- Complete tasks
+- Delete tasks
+- Task history logging
+- Pagination system for task and history
 
 # How to run
 1. Install Python
@@ -23,7 +23,7 @@ Main.py - Main program loop with all other programs
 
 improvements coming soon.
 
-##Future Improvements
+## Future Improvements
 
 - Task priorities
 - Due Dates
