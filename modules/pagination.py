@@ -1,7 +1,26 @@
 def display_paginated(items, items_per_page=5):
-    for i in range(0, len(items), items_per_page):
-        page = items[i:i + items_per_page]
-        for index, item in enumerate(page, start=i + 1):
-            print(f"{index}. {item.strip()}")
-        if i + items_per_page < len(items):
-            input(" === Press Enter to view the next page: ")
+    total = len(items)
+    page = 0
+    while True:
+        start = page * items_per_page
+        end = start + items_per_page
+        page_items = items[start:end]
+        if not page_items:
+            print("No more items.")
+            return
+        for i, item in enumerate(page_items, start=start+1):
+            print(f"{i}. {item}")
+
+        print("\nOptions:")
+        print("N - Next page")
+        print("P - Previous page")
+        print("E - Exit")
+        choice = input("Enter your choice: ").lower().strip()
+        if choice == "n":
+            page += 1
+        elif choice == "p" and page > 0:
+            page -= 1
+        elif choice == "e":
+            break
+        else:
+            print("Invalid option.")

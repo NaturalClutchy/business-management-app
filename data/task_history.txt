@@ -1,0 +1,13 @@
+ADDED - Debug code (if needed)
+DELETED - Debug code (if needed)
+ADDED - Continue to debug code (if needed)
+REVISED - Continue to debug code (if needed)
+COMPLETED - [✓] Debug Code
+ADDED - Push v2 of Task Manager to GitHub
+ADDED - 1
+ADDED - Complete JSON Convertion
+COMPLETED - {'title': 'Complete JSON Convertion', 'priority': 'Medium', 'due_date': '2025-03-16', 'completed': True}
+ADDED - Update code with Task Sorting and Overdue Detection
+ADDED - Make sure to sort history by recent
+ADDED - Learn how to use SQLite
+2026-03-16 18:29:31 | ADDED | Implement History Time Stamps

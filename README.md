@@ -8,8 +8,15 @@ A command-line task manager written in Python.
 - Edit tasks
 - Complete tasks
 - Delete tasks
+- Task Statistics
 - Task history logging
+- Task Searching
+- Task Sorting
+- Task Priorities
 - Pagination system for task and history
+- Due Dates
+- Date and Time logging for history and task viewing
+
 
 # How to run
 1. Install Python
@@ -25,8 +32,7 @@ improvements coming soon.
 
 ## Future Improvements
 
-- Task priorities
-- Due Dates
-- Search tasks
-- Sorting tasks
+- Due today view
+- Overdue view
 - Datebase support
+- Web App
