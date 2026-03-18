@@ -8,8 +8,8 @@ def display_paginated(items, items_per_page=5):
         if not page_items:
             print("No more items.")
             return
-        for i, item in enumerate(page_items, start=start+1):
-            print(f"{i}. {item}")
+        for item in page_items:
+            print(item)
 
         print("\nOptions:")
         print("N - Next page")

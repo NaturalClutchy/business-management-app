@@ -16,35 +16,16 @@ def log_history(action, task):
         print(f"Error logging history: {e}")
 
 
-def history_menu():
-    while True:
-        print("\n=== History Menu ===")
-        print("1. View History")
-        print("2. Clear History")
-        print("3. Back to Main Menu")
-        choice = input("Enter your choice (1-3): ")
-        if choice == "1":
-            try:
-                with open(HISTORY_PATH, "r", encoding="utf-8") as file:
-                    history = file.readlines()[::-1]
-                    if not history:
-                        print("No history available.")
-                        return
-
-                    display_paginated(history)
-            except FileNotFoundError:
-                print("No history available.")
-        elif choice == "2":
-            sure = input("Are you sure you want to clear history? (yes/no): ")
-            if sure.lower() != "yes":
-                print("History clearing cancelled.")
-                return
-            else:
-                clear_history()
-        elif choice == "3":
-            break
-        else:
-            print("Invalid choice.")
+def view_history():
+    try:
+        with open(HISTORY_PATH, "r", encoding="utf-8") as file:
+            history = file.readlines()[::-1]
+        if not history:
+            print("No history available.")
+            return
+        display_paginated(history)
+    except FileNotFoundError:
+        print("No history available.")
 
 
 def clear_history():

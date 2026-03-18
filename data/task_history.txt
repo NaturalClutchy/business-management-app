@@ -11,3 +11,20 @@ ADDED - Update code with Task Sorting and Overdue Detection
 ADDED - Make sure to sort history by recent
 ADDED - Learn how to use SQLite
 2026-03-16 18:29:31 | ADDED | Implement History Time Stamps
+2026-03-17 01:32:24 | ADDED | Get the database to work
+2026-03-17 01:33:14 | ADDED | Reach out to Khaled
+2026-03-17 01:33:51 | ADDED | Include inability to set due dates in the past
+2026-03-17 01:59:13 | ADDED | Go to Sleep
+2026-03-17 02:00:54 | COMPLETED | Push the Update to GitHub
+2026-03-17 02:01:55 | ADDED | Fix the bug in screenshot in discord 
+2026-03-17 13:52:36 | COMPLETED | Update code with Task Sorting and Overdue Detection
+2026-03-17 18:02:15 | COMPLETED | Go to Sleep
+2026-03-17 18:02:24 | COMPLETED | Fix the bug in screenshot in discord 
+2026-03-17 18:02:30 | COMPLETED | Get the database to work
+2026-03-17 19:17:11 | ADDED | Push update to git
+2026-03-17 19:38:55 | COMPLETED | Include inability to set due dates in the past
+2026-03-17 20:19:48 | EDITED | Reach out to Khaled
+2026-03-17 20:20:08 | ADDED | Test
+2026-03-17 20:20:43 | DELETED | Test
+2026-03-17 20:21:28 | ADDED | test
+2026-03-17 20:21:45 | DELETED | test
