@@ -6,14 +6,12 @@ HISTORY_PATH = os.path.join(BASE_DIR, "data", "task_history.txt")
 # Import datetime for logging history with timestamps
 
 
-def log_history(action, task):
-    os.makedirs("data", exist_ok=True)
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    try:
-        with open(HISTORY_PATH, "a", encoding="utf-8") as file:
-            file.write(f"{timestamp} | {action} | {task}\n")
-    except Exception as e:
-        print(f"Error logging history: {e}")
+def log_history(action, title):
+    os.makedirs(os.path.dirname(HISTORY_PATH), exist_ok=True)
+
+    with open(HISTORY_PATH, "a", encoding="utf-8") as f:
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        f.write(f"[{timestamp}] {action}: {title}\n")
 
 
 def view_history():

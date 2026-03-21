@@ -2,6 +2,10 @@ from modules.history import log_history
 from modules.pagination import display_paginated
 from modules.database import add_task_db, get_tasks_db, update_task_db, delete_task_db, connect_db
 from datetime import datetime
+from services.task_service import (create_task,
+                                   delete_task as delete_task_service,
+                                   complete_task as complete_task_service,
+                                   edit_task as edit_task_service)
 
 
 def is_overdue(due_date):
@@ -27,20 +31,13 @@ def sort_task(tasks):
 def add_task():
     title = input("Enter the task: ")
     priority = input("Enter the priority (High/Medium/Low): ")
-    while True:
-        due_date = input(
-            "Enter due date (YYYY-MM-DD), or press enter for no due date: ")
-        if due_date == "":
-            due_date = "None"
-            break
-        if is_valid_due_date(due_date):
-            break
-        else:
-            print("Invalid date. Cannot be in the past or wrong format.")
+    due_date = input("Enter due date (YYYY-MM-DD) or press enter to skip: ")
 
-    log_history("ADDED", title)
-    add_task_db(title, priority, due_date)
-    print(f"Task '{title}' has been added to the list.")
+    success, message = create_task(title, priority, due_date)
+    if success:
+        print(message)
+    else:
+        print("Task creation failed.")
 
 
 def delete_task():
@@ -49,19 +46,13 @@ def delete_task():
         task_id = int(input("Enter task ID to delete, or 0 to cancel: "))
         if task_id == 0:
             return
-        tasks = get_tasks_db()
-        for task in tasks:
-            if task[0] == task_id:
-                title = task[1]
-                confirm = input(
-                    (f"Are you sure you want to delete task '{title}'? (yes/no): ")).lower()
-                if confirm == "yes":
-                    delete_task_db(task_id)
-                    log_history("DELETED", title)
-                    print("Task deleted.")
-                else:
-                    print("Deletion cancelled.")
-                return
+        confirm = input(
+            f"Are you sure you want to delete taskm {task_id}? (yes/no): ").lower()
+        if confirm != "yes":
+            print("Deletion cancelled.")
+            return
+        success, message = delete_task_service(task_id)
+        print(message)
     except ValueError:
         print("Please enter a valid number.")
 
@@ -69,24 +60,14 @@ def delete_task():
 def complete_task():
     display_tasks_simple()
     try:
-        task_id = int(
-            input("enter the ID of which task you want to complete, or 0 to cancel: "))
+        task_id = int(input("Enter task ID to complete (0 to cancel): "))
         if task_id == 0:
-            print("Cancelled.")
             return
-        tasks = get_tasks_db()
-        for task in tasks:
-            if task[0] == task_id:
-                if task[4] == 1:
-                    print("Task is already marked as complete")
-                    return
-                title, priority, due_date, = task[1], task[2], task[3]
-                update_task_db(task_id, title, priority, due_date, 1)
-                print("Task marked as complete.")
-                log_history("COMPLETED", title)
-                return
+        success, message = complete_task_service(task_id)
+        print(message)
+
     except ValueError:
-        print("Invalid Input.")
+        print("Please enter a valid number.")
 
 
 def edit_task():
@@ -114,11 +95,16 @@ def edit_task():
                     else:
                         print("Invalid date. Cannot be in the past or wrong format.")
 
-                update_task_db(task_id, new_title,
-                               new_priority, new_due, task[4])
-                log_history("EDITED", new_title)
-                print("Task updated.")
-                return
+                success, message = edit_task_service(
+                    task_id,
+                    new_title,
+                    new_priority,
+                    new_due
+                )
+                if success:
+                    log_history("EDITED", new_title)
+                    print("Task updated.")
+                    return
         print("Task ID not found")
     except ValueError:
         print("Invalid input.")
@@ -151,20 +137,6 @@ def display_tasks_simple():
         status = "[✓]" if completed else "[ ]"
 
         print(f"{task_id}. {status} {title} | Priority: {priority} | Due: {due_date}")
-
-
-def search_task():
-    keyword = input("Enter keyword to search: ").lower()
-    conn = connect_db()
-    cursor = conn.cursor()
-    cursor.execute("""
-                   SELECT * FROM tasks
-                   WHERE title LIKE ?
-                   """, (f"%{keyword}%",))
-    results = cursor.fetchall()
-    conn.close()
-    formatted = format_tasks(results)
-    display_paginated(formatted)
 
 
 def search_task():
