@@ -1,5 +1,6 @@
 from tkinter import ttk
 import tkinter as tk
+import calendar
 from datetime import datetime
 from modules.history import HISTORY_PATH
 from modules.database import get_tasks_db
@@ -7,6 +8,7 @@ from services.task_service import (create_task, get_filtered_tasks,
                                    complete_task as complete_task_service,
                                    delete_task as delete_task_service,
                                    edit_task as edit_task_service)
+from modules.calendar_view import open_calendar
 
 
 window = tk.Tk()
@@ -67,6 +69,12 @@ def add_task_gui():
         load_tasks()
     else:
         status_label.config(text=message, fg="red")
+
+    if calendar_window:
+        try:
+            calendar_window.refresh_calendar()
+        except:
+            pass
 
 
 def update_column_headers():
@@ -182,6 +190,12 @@ def complete_task_gui():
     else:
         status_label.config(text=message, fg="red")
 
+    if calendar_window:
+        try:
+            calendar_window.refresh_calendar()
+        except:
+            pass
+
 
 def delete_task_gui():
     task_id = get_selected_task_id()
@@ -193,6 +207,12 @@ def delete_task_gui():
         load_tasks()
     else:
         status_label.config(text=message, fg="red")
+
+    if calendar_window:
+        try:
+            calendar_window.refresh_calendar()
+        except:
+            pass
 
 
 def open_edit_window(event):
@@ -240,7 +260,13 @@ def open_edit_window(event):
             status_label.config(text=message, fg="red")
         if not title_entry_edit.get():
             return
+        if calendar_window:
+            try:
+                calendar_window.refresh_calendar()
+            except:
+                pass
         edit_window.destroy()
+
     save_button = tk.Button(edit_window, text="Save", command=save_changes)
     save_button.pack(pady=10)
 
@@ -351,7 +377,16 @@ tk.Button(action_frame, text="Refresh",
 
 tk.Button(action_frame, text="View History",
           command=open_history_window).pack(fill="x", pady=4)
+calendar_window = None
 
+
+def open_calendar_gui():
+    global calendar_window
+    calendar_window = open_calendar(window)
+
+
+tk.Button(action_frame, text="View Calendar",
+          command=open_calendar_gui).pack(fill="x", pady=4)
 status_label = tk.Label(
     window,
     text="Ready",
