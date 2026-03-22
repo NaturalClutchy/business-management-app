@@ -1,6 +1,6 @@
 # Business Management App (In Progress)
 
-<<<<<<< HEAD
+
 A modular Python-based productivity system designed to evolve into a full business management application.
 
 ## 🚀 Overview
