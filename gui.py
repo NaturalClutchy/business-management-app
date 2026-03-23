@@ -10,6 +10,7 @@ from services.task_service import (create_task, get_filtered_tasks,
                                    edit_task as edit_task_service)
 from modules.calendar_view import open_calendar
 
+selected_date_filter = None
 
 window = tk.Tk()
 window.title("Task Manager")
@@ -24,6 +25,12 @@ stats_label.grid(row=3, column=0, columnspan=2, sticky="ew")
 
 sort_column = None
 sort_reverse = False
+
+
+def set_date_filter(date_str):
+    global selected_date_filter
+    selected_date_filter = date_str
+    load_tasks()
 
 
 def update_statistics(tasks):
@@ -98,6 +105,26 @@ def refresh_tasks():
     load_tasks()
 
 
+def clear_filters():
+    search_entry.delete(0, tk.END)
+    filter_priority_var.set("All")
+    completed_var.set("All")
+    overdue_var.set(False)
+    load_tasks()
+
+
+def clear_date_filter():
+    global selected_date_filter
+    selected_date_filter = None
+    load_tasks()
+
+
+def reload_tasks():
+    refresh_tasks()
+    clear_date_filter()
+    clear_filters()
+
+
 def sort_tasks(column):
     global sort_column, sort_reverse
     if sort_column == column:
@@ -117,6 +144,19 @@ def load_tasks():
         status=completed_var.get(),
         overdue_only=overdue_var.get()
     )
+    global selected_date_filter
+    if selected_date_filter:
+        tasks = [t for t in tasks if t[3] == selected_date_filter]
+
+        try:
+            dt = datetime.strptime(selected_date_filter, "%Y-%m-%d")
+            formatted_date = dt.strftime("%m/%d/%Y")
+            status_label.config(text=f"Viewing: {formatted_date}")
+        except:
+            status_label.config(text=f"Viewing: {selected_date_filter}")
+    else:
+        status_label.config(text="Ready")
+
     tasks.sort(key=lambda t: (
         t[4], {"High": 0, "Medium": 1, "Low": 2}.get(t[2], 3),))
 
@@ -275,14 +315,6 @@ def on_filter_change(event=None):
     load_tasks()
 
 
-def clear_filters():
-    search_entry.delete(0, tk.END)
-    filter_priority_var.set("All")
-    completed_var.set("All")
-    overdue_var.set(False)
-    load_tasks()
-
-
 left_frame = tk.Frame(window)
 left_frame.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
 
@@ -320,7 +352,6 @@ task_tree.column("Status", width=60)
 task_tree.column("Title", width=180)
 task_tree.column("Priority", width=80)
 task_tree.column("Due Date", width=100)
-
 
 tk.Label(add_frame, text="Title:").pack(anchor="w")
 title_entry = tk.Entry(add_frame)
@@ -372,8 +403,8 @@ tk.Button(action_frame, text="Complete Task",
           command=complete_task_gui).pack(fill="x", pady=4, ipady=3)
 tk.Button(action_frame, text="Delete Task",
           command=delete_task_gui).pack(fill="x", pady=4, ipady=3)
-tk.Button(action_frame, text="Refresh",
-          command=refresh_tasks).pack(fill="x", pady=4, ipady=3)
+tk.Button(action_frame, text="Reload Tasks",
+          command=reload_tasks).pack(fill="x", pady=4, ipady=3)
 
 tk.Button(action_frame, text="View History",
           command=open_history_window).pack(fill="x", pady=4)
@@ -382,7 +413,7 @@ calendar_window = None
 
 def open_calendar_gui():
     global calendar_window
-    calendar_window = open_calendar(window)
+    calendar_window = open_calendar(window, set_date_filter)
 
 
 tk.Button(action_frame, text="View Calendar",

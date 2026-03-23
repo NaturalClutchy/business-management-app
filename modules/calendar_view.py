@@ -4,14 +4,20 @@ from datetime import datetime
 from modules.database import get_tasks_db
 
 
-def open_calendar(parent,):
+def open_calendar(parent, set_date_filter):
     cal_window = tk.Toplevel(parent)
     cal_window.title("Calendar")
     cal_window.geometry("400x400")
+    cal_window.grid_rowconfigure(2, weight=1)
+    cal_window.grid_columnconfigure(0, weight=1)
 
     current_date = datetime.now()
     current_year = current_date.year
     current_month = current_date.month
+
+    def on_day_click(year, month, day, set_date_filter):
+        selected_date = f"{year}-{month:02d}-{day:02d}"
+        set_date_filter(selected_date)
 
     def build_calendar(year, month):
         tasks = get_tasks_db()
@@ -23,6 +29,8 @@ def open_calendar(parent,):
         cal = calendar.monthcalendar(year, month)
 
         task_days = {}
+        task_counts = {}
+
         overdue_days = set()
         today = datetime.now().date()
         for task in tasks:
@@ -32,18 +40,21 @@ def open_calendar(parent,):
                 try:
                     dt = datetime.strptime(due_date, "%Y-%m-%d")
                     if dt.year == year and dt.month == month:
+
+                        task_counts[dt.day] = task_counts.get(dt.day, 0) + 1
+
                         existing = task_days.get(dt.day)
                         priority_order = {"High": 3, "Medium": 2, "Low": 1}
                         if not existing or priority_order[task[2]] > priority_order.get(existing, 0):
                             task_days[dt.day] = task[2]
-                    if dt.year == year and dt.month == month:
+
                         if dt.date() < today and not completed:
                             overdue_days.add(dt.day)
                 except:
                     pass
 
         nav_frame = tk.Frame(cal_window)
-        nav_frame.pack(pady=5)
+        nav_frame.grid(row=0, column=0, sticky="ew", pady=5)
 
         def prev_month():
             nonlocal current_month, current_year
@@ -70,10 +81,15 @@ def open_calendar(parent,):
 
         header = tk.Label(
             cal_window, text=f"{calendar.month_name[month]} {year}", font=("Arial", 14))
-        header.pack(pady=10)
+        header.grid(row=1, column=0, pady=10)
 
         grid_frame = tk.Frame(cal_window)
-        grid_frame.pack()
+        grid_frame.grid(row=2, column=0, sticky="nsew")
+
+        for i in range(7):
+            grid_frame.grid_columnconfigure(i, weight=1)
+        for i in range(7):
+            grid_frame.grid_rowconfigure(i, weight=1)
 
         days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
@@ -85,7 +101,7 @@ def open_calendar(parent,):
             for col_idx, day in enumerate(week):
                 if day == 0:
                     tk.Label(grid_frame, text="").grid(
-                        row=row_idx, column=col_idx)
+                        row=row_idx, column=col_idx, sticky="nsew")
                 else:
                     bg_color = "SystemButtonFace"
                     if day in overdue_days:
@@ -102,17 +118,23 @@ def open_calendar(parent,):
                             bg_color = "#7fbf7f"
                         else:
                             bg_color = "SystemButtonFace"
+                    count = task_counts.get(day, 0)
+                    if count > 0:
+                        display_text = f"{day}\n(Tasks: {count})"
+                    else:
+                        display_text = str(day)
 
                     btn = tk.Button(
                         grid_frame,
-                        text=str(day),
+                        text=display_text,
                         width=5,
                         height=2,
                         bg=bg_color,
-                        command=lambda d=day: show_tasks_for_day(
-                            parent, tasks, year, month, d)
+                        command=lambda d=day: on_day_click(
+                            year, month, d, set_date_filter)
                     )
-                    btn.grid(row=row_idx, column=col_idx)
+                    btn.grid(row=row_idx, column=col_idx,
+                             sticky="nsew", padx=2, pady=2)
 
     def refresh_calendar():
         build_calendar(current_year, current_month)
