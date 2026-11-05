@@ -1,47 +1,111 @@
-Business Management Application
-Python task-management desktop app | Tkinter | SQLite
-Status: In development
+# Business Management Application
 
-A modular productivity application built to make everyday task tracking easier. I developed both a command-line interface and a Tkinter desktop interface, backed by SQLite for persistent storage. The project is also a way for me to practice organizing software into separate interface, service, and data layers.
-Current features
-- Task management: Create, edit, delete, complete, and review tasks.
-- Persistence: Store task data using SQLite rather than relying on a temporary in-memory list.
-- Priority tracking: High, Medium, and Low priorities, with visual cues in the desktop interface.
-- Search and filtering: Search tasks and filter by priority, completion status, and overdue status.
-- Calendar: Navigate a monthly calendar to inspect dated tasks and deadlines.
-- Activity history: Review timestamped changes to tasks.
-- Two interfaces: Use either the command-line program or the Tkinter GUI.
-Tech stack
-Area	Technology
-Programming language	Python
-Desktop user interface	Tkinter / ttk
-Data storage	SQLite (sqlite3)
-Version control	Git and GitHub
+**Python Task Management App | Tkinter | SQLite**
 
+**Status:** In Development
 
-Project structure
+## Overview
+
+A modular productivity application designed to make everyday task management easier.
+
+I developed a command-line interface and a Tkinter desktop interface, supported by an SQLite database for persistent task storage.
+
+This project has helped me develop skills in Python programming, database management, GUI development, and modular software architecture.
+
+## Features
+
+### Task Management
+- Create, edit, delete, and complete tasks.
+- Assign High, Medium, and Low priorities.
+- Track deadlines and overdue tasks.
+- Search, filter, and sort tasks.
+
+### Database Integration
+- Store task information using SQLite.
+- Maintain task information between sessions.
+- Implement Create, Read, Update, and Delete (CRUD) operations.
+
+### Graphical User Interface
+- Interactive desktop interface built with Tkinter.
+- Search and filter tasks.
+- Display priority indicators and task status.
+- Navigate a calendar to view deadlines.
+
+### Activity History
+- Track changes made to tasks.
+- Review timestamped task activity.
+
+## Technologies Used
+
+| Technology | Purpose |
+|------------|---------|
+| Python | Core programming language |
+| Tkinter | Desktop user interface |
+| SQLite | Database storage |
+| Git | Version control |
+| GitHub | Source code management |
+
+## Project Structure
+
+```text
 business-management-app/
-├── gui.py            # Desktop application entry point
-├── main.py           # Command-line interface
-├── modules/          # Database, calendar and supporting modules
-├── services/         # Task operations and business logic
-└── data/             # Local task data
-Running the application
-1. Install Python 3.
-2. Clone the repository and open the project folder:
-   git clone https://github.com/NaturalClutchy/business-management-app.git
-   cd business-management-app
-3. To launch the desktop interface:
-   python gui.py
-4. To use the command-line interface instead:
-   python main.py
-   
-Note: The application is a work in progress. Depending on your Python installation, Tkinter may need to be installed separately. If you're testing a development branch, verify its database schema before using an older local database file.
-What I learned
-- Designing create/read/update/delete (CRUD) workflows around persistent data.
-- Separating user-interface behavior from task services and database logic.
-- Building interactive filtering, calendar views, and state updates.
-- Debugging changes across modules and maintaining a repository with Git.
-Future directions
-Potential additions include a web API, more robust recurring-task behavior, and optional AI-powered task assistance. These are plans, not currently shipped features.
-Created by Rene Garcia · GitHub profile
+├── gui.py
+├── main.py
+├── modules/
+├── services/
+└── data/
+```
+
+## Installation
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/NaturalClutchy/business-management-app.git
+```
+
+### 2. Open the Project Folder
+
+```bash
+cd business-management-app
+```
+
+### 3. Run the Desktop Application
+
+```bash
+python gui.py
+```
+
+### 4. Run the Command-Line Version
+
+```bash
+python main.py
+```
+
+**Note:** This application is still under development. Some functionality may change as the project progresses.
+
+## What I Learned
+
+- Building applications using object-oriented and modular programming concepts.
+- Implementing CRUD functionality with SQLite.
+- Separating database logic, application services, and user interfaces.
+- Developing interactive GUIs with Tkinter.
+- Debugging and maintaining Python projects using Git.
+
+## Future Development
+
+Planned improvements include:
+
+- Improved recurring-task functionality.
+- A web-based interface.
+- API integration.
+- AI-assisted task management.
+- Additional business productivity features.
+
+These are future development goals and have not all been implemented.
+
+## Author
+
+**Rene Garcia**
+
+Computer Science/Engineering Student at UCNJ
