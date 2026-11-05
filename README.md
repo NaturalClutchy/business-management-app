@@ -1,245 +1,47 @@
-# Business Management App (In Progress)
+Business Management Application
+Python task-management desktop app | Tkinter | SQLite
+Status: In development
+
+A modular productivity application built to make everyday task tracking easier. I developed both a command-line interface and a Tkinter desktop interface, backed by SQLite for persistent storage. The project is also a way for me to practice organizing software into separate interface, service, and data layers.
+Current features
+- Task management: Create, edit, delete, complete, and review tasks.
+- Persistence: Store task data using SQLite rather than relying on a temporary in-memory list.
+- Priority tracking: High, Medium, and Low priorities, with visual cues in the desktop interface.
+- Search and filtering: Search tasks and filter by priority, completion status, and overdue status.
+- Calendar: Navigate a monthly calendar to inspect dated tasks and deadlines.
+- Activity history: Review timestamped changes to tasks.
+- Two interfaces: Use either the command-line program or the Tkinter GUI.
+Tech stack
+Area	Technology
+Programming language	Python
+Desktop user interface	Tkinter / ttk
+Data storage	SQLite (sqlite3)
+Version control	Git and GitHub
 
 
-A modular Python-based productivity system designed to evolve into a full business management application.
-
-## 🚀 Overview
-
-This project started as a CLI Task Manager and has been upgraded into a GUI-based application using Tkinter. It is being built with scalability in mind, allowing future expansion into features like calendars, scheduling systems, and AI-powered tools.
-
----
-
-## ✨ Features
-
-### Task Management
-- Add, edit, delete tasks
-- Mark tasks as complete
-- Priority levels (High, Medium, Low)
-- Due date support with validation
-- Overdue task detection
-- History View (With timestamps)
-
-### GUI (Tkinter)
-- Interactive interface with Treeview table
-- Live search and filtering
-- Sorting by columns (with indicators ▲ ▼)
-- Color-coded priorities
-- Status feedback system
-
-### Filtering System
-- Search by keyword
-- Filter by priority
-- Filter by completion status
-- Overdue-only filter
-
-### Data Management
-- SQLite database integration
-- Persistent task storage
-- Clean CRUD operations
-
-### History System
-- Task activity logging with timestamps
-- Paginated history viewing
-=======
-A modular Python-based productivity system designed to evolve into a full-scale business management SaaS platform.
-
----
-
-## 🚀 Overview
-
-This project began as a command-line task manager and has since evolved into a fully interactive desktop application using Tkinter and SQLite.
-
-It is built with **scalability and system design in mind**, with the long-term goal of integrating task management, scheduling, and AI-powered business assistance into a unified platform.
-
----
-
-## ✨ Features
-
-### 📋 Task Management
-
-* Create, edit, and delete tasks
-* Mark tasks as complete/incomplete
-* Priority levels (High, Medium, Low)
-* Due date validation (prevents past dates)
-* Overdue task detection
-* Persistent storage using SQLite
-
----
-
-### 🖥️ GUI System (Tkinter)
-
-* Interactive task table (Treeview)
-* Real-time search and filtering
-* Column sorting with visual indicators (▲ ▼)
-* Color-coded priorities
-* Status feedback system
-
----
-
-### 🔍 Advanced Filtering
-
-* Keyword search (live)
-* Filter by priority
-* Filter by completion status
-* Overdue-only filtering
-
----
-
-### 📅 Calendar System (v6)
-
-* Interactive monthly calendar view
-* Month navigation with year transitions
-* Real-time task synchronization
-* Clickable days to view tasks
-* Visual indicators:
-
-  * 🔴 Overdue tasks
-  * 🔵 Current day
-  * 🔴/🟠/🟢 Priority-based coloring (High / Medium / Low)
-* Intelligent color priority handling (overdue > today > task priority)
-
----
-
-### 🕓 History Tracking
-
-* Task activity logging:
-
-  * Added, edited, deleted
-  * Completed / uncompleted
-* Timestamped records
-* Reverse chronological display
-* Paginated viewing (CLI)
->>>>>>> 422d1a2 (v6: Added interactive calendar system with real-time updates and priority-based visualization)
-
----
-
-## 🧠 Architecture
-
-<<<<<<< HEAD
-The project follows a layered structure:
-
-- **Modules Layer** → Database and core logic  
-- **Services Layer** → Business logic and validation  
-- **GUI Layer** → User interface  
-
-This structure allows for easy expansion into future systems like calendars, APIs, and AI tools.
-=======
-This project follows a modular, layered architecture:
-
-* **Modules Layer** → Database, history, and core utilities
-* **Services Layer** → Business logic and validation
-* **GUI Layer** → User interface and interaction
-
-This separation improves:
-
-* Maintainability
-* Scalability
-* Readability
-
-…and prepares the system for future transition into a web-based application.
->>>>>>> 422d1a2 (v6: Added interactive calendar system with real-time updates and priority-based visualization)
-
----
-
-## 📂 Project Structure
-<<<<<<< HEAD
+Project structure
 business-management-app/
-│
-├── data/ # Database and history files
-├── modules/ # Core logic (database, tasks, history)
-├── services/ # Business logic layer
-├── gui.py # GUI application
-├── main.py # CLI application
-└── README.md
-=======
-
-```
-business-management-app/
-│
-├── data/               # Database and history storage
-├── modules/            # Core systems (database, calendar, history, etc.)
-├── services/           # Business logic layer
-├── gui.py              # Main GUI application
-├── main.py             # CLI version
-└── README.md
-```
->>>>>>> 422d1a2 (v6: Added interactive calendar system with real-time updates and priority-based visualization)
-
----
-
-## ▶️ How to Run
-
-<<<<<<< HEAD
-### CLI Version:
-=======
-### Run GUI Application
-
-```
-python gui.py
-```
-
-### Run CLI Version
-
-```
->>>>>>> 422d1a2 (v6: Added interactive calendar system with real-time updates and priority-based visualization)
-python main.py
-```
-
-<<<<<<< HEAD
-
-### GUI Version:
-python gui.py
-
----
-
-## 🔮 Future Plans
-
-- 📅 Calendar system with task integration
-- 🤖 AI-powered task and email assistance
-- 📧 Email & meeting integration
-- 🌐 Web-based application
-- ☁️ Cloud sync and multi-device support
-
----
-
-## 🎯 Goal
-
-To build a scalable, real-world business management system while developing strong software engineering skills.
-=======
----
-
-## 🔮 Future Roadmap
-
-* 📅 Google Calendar integration (meetings & scheduling)
-* 📧 Email integration and summarization
-* 🤖 AI Business Assistant
-
-  * Task suggestions
-  * Email drafting
-  * Workflow automation
-* 🌐 Web-based application (Flask / FastAPI)
-* ☁️ Cloud sync and multi-device support
-
----
-
-## 🎯 Project Vision
-
-To develop a unified business management system that combines:
-
-* Task management
-* Scheduling
-* Communication tools
-* AI-driven assistance
-
-into a single, intelligent productivity platform.
->>>>>>> 422d1a2 (v6: Added interactive calendar system with real-time updates and priority-based visualization)
-
----
-
-## 👤 Author
-
-<<<<<<< HEAD
-Rene M. Garcia Jr
-=======
-**Rene M. Garcia Jr**
->>>>>>> 422d1a2 (v6: Added interactive calendar system with real-time updates and priority-based visualization)
+├── gui.py            # Desktop application entry point
+├── main.py           # Command-line interface
+├── modules/          # Database, calendar and supporting modules
+├── services/         # Task operations and business logic
+└── data/             # Local task data
+Running the application
+1. Install Python 3.
+2. Clone the repository and open the project folder:
+   git clone https://github.com/NaturalClutchy/business-management-app.git
+   cd business-management-app
+3. To launch the desktop interface:
+   python gui.py
+4. To use the command-line interface instead:
+   python main.py
+   
+Note: The application is a work in progress. Depending on your Python installation, Tkinter may need to be installed separately. If you're testing a development branch, verify its database schema before using an older local database file.
+What I learned
+- Designing create/read/update/delete (CRUD) workflows around persistent data.
+- Separating user-interface behavior from task services and database logic.
+- Building interactive filtering, calendar views, and state updates.
+- Debugging changes across modules and maintaining a repository with Git.
+Future directions
+Potential additions include a web API, more robust recurring-task behavior, and optional AI-powered task assistance. These are plans, not currently shipped features.
+Created by Rene Garcia · GitHub profile
